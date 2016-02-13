@@ -1,0 +1,24 @@
+<div class="wrapper" ng-controller='productsController'>
+	<h3>Products Controller</h3>
+	<div id="addProduct">
+		<form>
+			<input type="text" ng-model="filter_product"><br>
+			<button>Filter</button>
+		</form>
+		<h4>Add a new product</h4>
+		<form>
+			Name: <br><input type="text" ng-model="newProduct.name"><br>
+			Image(url): <br><input type="text" ng-model="newProduct.image"><br>
+			Description: <br><textarea ng-model="newProduct.description"></textarea><br>
+			Initial Quantity: <br><input ng-model="newProduct.quantity" type="number" min="1" max="15"><br>
+			<input type="submit" value="Create" ng-click="addProduct()">
+		</form>
+	</div>
+	<div id="showProduct">
+		<div class="product" ng-repeat="product in products | filter: filter_product">
+			<img src="{{product.image}}" height="100">
+			<p class="productName">{{product.name}}</p>
+			<p class="productQuantity">({{product.quantity}} left)</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<div class="wrapper" ng-controller="dashboardController">
+	<h3>Dashboard Controller</h3>
+	<div class="search"><input type="text" ng-model='filter_product' placeholder="search.."></div>
+	<div id="showProduct">
+		<div class="product" ng-repeat="product in products | filter: filter_product" ng-if="$index == 0 || $index == 1 || $index == 2">
+			<img src="{{product.image}}" height="100">
+			<p class="productName">{{product.name}}</p>
+			<p class="productQuantity">({{product.quantity}} left)</p>
+		</div>
+		<div id="recentOrders" >
+			<h4>Recent Orders:</h4>
+			<p class="tab" ng-repeat="order in orders | orderBy: '-date'">{{order.customer}} purchased {{order.quantity}} {{order.product}} ({{order.difference}})</p>
+		</div>
+		<div id="recentCustomers">
+			<h4>Recent Customers:</h4>
+			<p class="tab" ng-repeat="customer in customers | orderBy: '-date'">{{customer.name}} joined the store. ({{customer.difference}})</p>
+		</div>
+	</div>
+</div>

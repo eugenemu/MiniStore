@@ -1,0 +1,33 @@
+<div ng-controller='ordersController'>
+	<h3>Orders Controller</h3>
+	<h4>Add a New Order</h4>
+	<form>
+		Customer: 
+		<select ng-model="newOrder.customer">
+			<option value="{{customer.name}}" ng-repeat="customer in customers">{{customer.name}}</option>
+		</select><br>
+		Product:
+		<select ng-model="newOrder.product" required>
+			<option value="{{product.name}}" ng-repeat="product in products">{{product.name}}</option>
+		</select>
+		Quantity: <input ng-model="newOrder.quantity" type="number" ng-model="newOrder.quantity" min="1" max="15"><br>
+		<input type="submit" value="Order" ng-click="addOrder()">
+		<span ng-show="quantity == true">Not enough in stock!</span>
+		<span ng-show="error == true">Must fill out all parts of order.</span>
+	</form>
+	<p>Filter: <input type="text" ng-model="filter_order"></p>
+	<table>
+		<tr>
+			<th>Customer Name</th>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Date</th>
+		</tr>
+		<tr ng-repeat="order in orders | filter: filter_order | orderBy: '-date'">
+			<td ng-bind="order.customer"></td>
+			<td ng-bind="order.product"></td>
+			<td ng-bind="order.quantity"></td>
+			<td ng-bind="order.date | date:'MM/dd/yyyy'"></td>
+		</tr>
+	</table>
+</div>
